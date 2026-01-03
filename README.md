@@ -17,7 +17,7 @@ Before you begin, ensure you have the following installed:
 - **npm** (comes with Node.js)
 - **Google Chrome** browser
 - **Google AI API access** (choose one):
-  - **Gemini API**: Free API key from [Google AI Studio](https://aistudio.google.com/app/apikey) (recommended for getting started)
+  - **Gemini API**: Free API key from [Google AI Studio](https://aistudio.google.com/app/api-keys) (recommended for getting started)
   - **Vertex AI**: Google Cloud Platform account with Vertex AI access
 
 ## Setup
@@ -68,15 +68,17 @@ This ensures you only scrape jobs that match your preferences, saving time and A
 
 ### Step 2: Start Chrome in Debug Mode
 
-Run the provided batch file to start Chrome with remote debugging:
+**Windows**: Run the provided batch file:
 ```bash
 start-chrome-debug.bat
 ```
 
-Or manually run:
+**macOS/Linux**: Run the provided shell script:
 ```bash
-"C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222
+./start-chrome-debug.sh
 ```
+
+Or manually start Chrome with remote debugging enabled (adjust path for your OS).
 
 ### Step 3: Scrape LinkedIn Jobs
 
