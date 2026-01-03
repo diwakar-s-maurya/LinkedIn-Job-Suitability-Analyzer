@@ -1,6 +1,6 @@
 # LinkedIn Job Suitability Analyzer
 
-A tool for scraping LinkedIn job postings and analyzing their suitability against your resume and your preferences using AI.
+A tool for scraping LinkedIn job postings and analyzing their suitability against your resume and your preferences using AI, so that you don't need to filter through job postings. It helps you find suitable jobs with almost zero effort required from you. It helps you dedicate your precious time elsewhere. 
 
 ## Features
 
@@ -16,10 +16,9 @@ Before you begin, ensure you have the following installed:
 - **Node.js** (v22 or higher recommended)
 - **npm** (comes with Node.js)
 - **Google Chrome** browser
-- **Google Cloud Platform account** with:
-  - Access to Vertex AI and Gemini API
-  - A service account with appropriate permissions
-  - Service account JSON key file
+- **Google AI API access** (choose one):
+  - **Gemini API**: Free API key from [Google AI Studio](https://aistudio.google.com/app/apikey) (recommended for getting started)
+  - **Vertex AI**: Google Cloud Platform account with Vertex AI access
 
 ## Setup
 
@@ -33,10 +32,19 @@ npm install
 npx playwright install chromium
 ```
 
-3. Set up Google Cloud credentials (for job suitability analysis):
+3. Set up Google AI credentials (for job suitability analysis):
    - Copy `.env.example` to `.env`
-   - Configure your Google Cloud project settings
-   - Ensure you have access to Vertex AI and Gemini API
+   - Choose one of two options:
+
+     **Option A: Gemini API (Recommended for simplicity)**
+     - Get an API key from [Google AI Studio](https://aistudio.google.com/app/apikey)
+     - Set `GOOGLE_API_KEY=your-api-key` in `.env`
+
+     **Option B: Vertex AI (For production/enterprise use)**
+     - Configure your Google Cloud project settings
+     - Set `GOOGLE_CLOUD_PROJECT` and `GOOGLE_CLOUD_LOCATION` in `.env`
+     - Ensure you have access to Vertex AI
+     - Set up service account credentials
 
 4. Add your resume:
    - Place your resume content in `resume.md` in the root directory

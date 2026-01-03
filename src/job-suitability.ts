@@ -52,11 +52,17 @@ interface AnalysisCache {
 	[jobFileName: string]: AnalysisRecord
 }
 
-const ai = new GoogleGenAI({
-	vertexai: true,
-	project: process.env.GOOGLE_CLOUD_PROJECT || "enterprise-genai-project",
-	location: process.env.GOOGLE_CLOUD_LOCATION || "global",
-})
+// Initialize AI client - supports both Vertex AI and Gemini API
+// If GOOGLE_API_KEY is set, use Gemini API; otherwise use Vertex AI
+const ai = process.env.GOOGLE_API_KEY
+	? new GoogleGenAI({
+			apiKey: process.env.GOOGLE_API_KEY,
+		})
+	: new GoogleGenAI({
+			vertexai: true,
+			project: process.env.GOOGLE_CLOUD_PROJECT || "enterprise-genai-project",
+			location: process.env.GOOGLE_CLOUD_LOCATION || "global",
+		})
 
 const OUTPUT_DIR = path.join(__dirname, "..", "job-suitability")
 const RESULTS_FILE = path.join(OUTPUT_DIR, "results.json")
@@ -192,6 +198,9 @@ ${jobPosting}`,
 // Main function
 async function run() {
 	console.log("Starting job suitability analysis")
+	console.log(
+		`Using ${process.env.GOOGLE_API_KEY ? "Gemini API" : "Google Vertex AI"}`,
+	)
 
 	// Create output directory if it doesn't exist
 	if (!fs.existsSync(OUTPUT_DIR)) {
